@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 import Interview from "./components/Interview";
 import VerifyCredentials from "./components/VerifyCredentials";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 const Dashboard = () => (
   <div>
@@ -20,6 +21,12 @@ const Dashboard = () => (
 );
 
 const App = () => {
+  const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
+    const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+    if (!browserSupportsSpeechRecognition) {
+      return null
+  }
+
   return (
     <AuthProvider>
       <Router>
