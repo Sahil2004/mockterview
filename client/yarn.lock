@@ -2446,7 +2446,7 @@ chalk@^4.0.0:
     "@uiw/react-codemirror" "^4.23.8"
     autoprefixer "^10.4.20"
     axios "^1.7.9"
-    client "file:../../../../Library/Caches/Yarn/v6/npm-client-0.0.0-616ee256-b817-4899-b603-589ef744ec5b-1739039355965/node_modules/client"
+    client "file:../../../../Library/Caches/Yarn/v6/npm-client-0.0.0-47aa3693-9a4e-450f-8eaa-b4b1941bd780-1739046770876/node_modules/client"
     ethers "^6.13.5"
     firebase "^11.3.0"
     framer-motion "^12.4.1"
@@ -2454,6 +2454,7 @@ chalk@^4.0.0:
     react "^19.0.0"
     react-dom "^19.0.0"
     react-router-dom "^7.1.5"
+    react-speech-recognition "^3.10.0"
     tailwindcss "^4.0.4"
 
 cliui@^8.0.1:
