@@ -8,7 +8,7 @@ import Question from "./components/Question";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 import Interview from "./components/Interview";
-
+import VerifyCredentials from "./components/VerifyCredentials";
 
 const Dashboard = () => (
   <div>
@@ -34,6 +34,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route path="/verify" element={<VerifyCredentials />} />
         </Routes>
       </Router>
     </AuthProvider>
