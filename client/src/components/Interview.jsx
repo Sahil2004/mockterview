@@ -11,6 +11,7 @@ const getRandomInt = (max) => {
 const Interview = () => {
   const [code, setCode] = useState("// Write your code here...");
   const [isSpeechOn, setIsSpeechOn] = useState(false);
+  const [chatInput, setChatInput] = useState("");
 
   const [data, setData] = useState([]);
   const rand = getRandomInt(2);
@@ -54,17 +55,14 @@ const Interview = () => {
             className="bg-red-400 p-6 rounded-md text-white text-xl text-center"
             statement
           >
-            <div class="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-md">
-              <h1 class="text-2xl font-semibold text-center mb-2">
+            <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-md">
+              <h1 className="text-2xl font-semibold text-center mb-2">
                 {data[rand]?.id}
               </h1>
 
-              <p class="mt-4 text-gray-700 leading-relaxed">
+              <p className="mt-4 text-gray-700 leading-relaxed">
                 {data[rand]?.statement}
               </p>
-
-
-
             </div>
           </div>
           <div className="bg-red-400 p-4 rounded-md">
@@ -79,8 +77,21 @@ const Interview = () => {
         </div>
 
         {/* Right Side: Chatbox */}
-        <div className="col-span-1 bg-red-400 p-6 rounded-md text-white text-xl text-center">
-          Chatbox with AI
+        <div className="col-span-1 flex flex-col space-y-4">
+          <div className="bg-red-400 p-6 rounded-md text-white text-xl text-center h-[calc(100%-245px)]">
+            Chatbox with AI
+          </div>
+
+          {/* New Chat Input Box */}
+          <div className="bg-red-400 p-4 rounded-md">
+            <input
+              type="text"
+              value={chatInput}
+              onChange={(e) => setChatInput(e.target.value)}
+              placeholder="Type your message..."
+              className="w-full p-2 rounded-md text-gray-700 focus:outline-none"
+            />
+          </div>
         </div>
       </div>
     </div>
