@@ -38,6 +38,6 @@ contract InterviewCredential is ERC721, Ownable {
     }
 
     function _tokenExists(uint256 tokenId) internal view returns (bool) {
-        return _ownerOf(tokenId) != address(0); // Check if token has an owner
+        return _ownerOf(tokenId) != address(0);
     }
 }

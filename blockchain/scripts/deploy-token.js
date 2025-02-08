@@ -1,12 +1,12 @@
 const hre = require("hardhat");
 
 async function main() {
-    const [deployer] = await hre.ethers.getSigners(); // Get the deployer account
+    const [deployer] = await hre.ethers.getSigners();
 
     const InterviewToken = await hre.ethers.getContractFactory("InterviewToken");
-    const contract = await InterviewToken.deploy(deployer.address); // ✅ Pass deployer as initialOwner
+    const contract = await InterviewToken.deploy(deployer.address);
 
-    await contract.waitForDeployment(); // ✅ Use waitForDeployment() instead of deployed()
+    await contract.waitForDeployment();
     
     console.log("Token Contract deployed at:", await contract.getAddress());
 }

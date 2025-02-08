@@ -4,7 +4,7 @@ async function main() {
     const InterviewCredential = await ethers.getContractFactory("InterviewCredential");
     const interviewCredential = await InterviewCredential.deploy();
 
-    await interviewCredential.waitForDeployment(); // ✅ Fix: Wait for deployment
+    await interviewCredential.waitForDeployment();
 
     console.log("InterviewCredential deployed to:", await interviewCredential.getAddress());
 }
