@@ -1,17 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import Question from './components/Question'
-import './App.css'
+// src/App.jsx
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./components/PrivateRoute";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+import Question from "./components/Question";
+import Home from "./components/Home";
+import SignUp from "./components/SignUp";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
+const Dashboard = () => (
+  <div>
+    <h1>Dashboard (Protected)</h1>
     <Question />
-    </>
-  )
-}
+    <Logout />
+  </div>
+);
 
-export default App
+const App = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <Routes>
+        <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+};
+
+export default App;

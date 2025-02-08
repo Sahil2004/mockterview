@@ -18,7 +18,7 @@ const Question = () => {
       <h1>Questions</h1>
       <ul>
         {data.map((item) => (
-          <ul>
+          <ul key={item.id}>
             <li>{item.id}</li>
             <li>{item.statement}</li>
             <li>{item.input}</li>
