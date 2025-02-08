@@ -58,6 +58,7 @@ const Interview = () => {
         requestBody
       );
       console.log("Feedback Report:", response.data);
+      alert(`Feedback Report:\n\nInitial Analysis Feedback: ${response.data.initialAnalysisFeedback}\n\nCode Review Feedback: ${response.data.codeReviewFeedback}\n\nAI Answer: ${response.data.aiAnswer}\n\nScore: ${response.data.score}`);
       setSubmitLoading(false);
     } catch (error) {
       console.error("Error submitting answer:", error);
@@ -97,7 +98,7 @@ const Interview = () => {
   return (
     <div className="h-screen bg-gray-100 flex flex-col items-center justify-center">
       {/* Timer */}
-      <div className="absolute top-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-md text-lg">
+      <div className="absolute top-4 left-4 bg-red-500 text-white px-4 py-2 rounded-md text-lg">
         Timer
       </div>
 
