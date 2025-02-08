@@ -1,6 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 const { generateResponse } = require('./aiService.cjs'); // Module for GPT API calls
 const app = express();
+
+app.use(cors()); // Enable CORS
 app.use(express.json());
 
 // Mock function to simulate fetching a question from a database
