@@ -7,6 +7,8 @@ import Logout from "./components/Logout";
 import Question from "./components/Question";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
+import Interview from "./components/Interview";
+
 
 const Dashboard = () => (
   <div>
@@ -28,7 +30,7 @@ const App = () => {
             path="/dashboard"
             element={
               <PrivateRoute>
-                <Dashboard />
+                <Interview />
               </PrivateRoute>
             }
           />
