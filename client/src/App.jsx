@@ -11,6 +11,7 @@ import SignUp from "./components/SignUp";
 import Interview from "./components/Interview";
 import VerifyCredentials from "./components/VerifyCredentials";
 import RewardUser from "./components/RewardUser";
+import RewardCreds from "./components/RewardCreds";
 
 const Dashboard = () => (
   <div>
@@ -47,6 +48,7 @@ const App = () => {
           />
           <Route path="/verify" element={<VerifyCredentials />} />
           <Route path="/reward" element={<RewardUser />} />
+          <Route path="/rewardCred" element={<RewardCreds />} />
         </Routes>
       </Router>
     </AuthProvider>
