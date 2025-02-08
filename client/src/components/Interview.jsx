@@ -4,6 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const getRandomInt = (max) => Math.floor(Math.random() * max);
 
@@ -57,9 +58,16 @@ const Interview = () => {
         "http://localhost:3000/submitAnswer",
         requestBody
       );
+      localStorage.setItem("score", response.data.score);
+      localStorage.setItem("feedback", response.data.codeReviewFeedback);
       console.log("Feedback Report:", response.data);
-      alert(`Feedback Report:\n\nInitial Analysis Feedback: ${response.data.initialAnalysisFeedback}\n\nCode Review Feedback: ${response.data.codeReviewFeedback}\n\nAI Answer: ${response.data.aiAnswer}\n\nScore: ${response.data.score}`);
       setSubmitLoading(false);
+      if(!alert(`Feedback Report:\n\nInitial Analysis Feedback: ${response.data.initialAnalysisFeedback}\n\nCode Review Feedback: ${response.data.codeReviewFeedback}\n\nAI Answer: ${response.data.aiAnswer}\n\nScore: ${response.data.score}`)) {
+        (() => {
+          const navigate = useNavigate();
+          navigate("/rewards");
+        })()
+      }
     } catch (error) {
       console.error("Error submitting answer:", error);
       setSubmitLoading(false);

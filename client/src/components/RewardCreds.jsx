@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { ABI } from "../ABIs/interview_creds"; // Ensure you have the correct ABI
 
-const contractAddress = "0xYourContractAddress"; // Replace with deployed contract address
+const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; // Ensure this is your deployed Hardhat contract address
 
 const MintNFT = () => {
   const [provider, setProvider] = useState(null);
@@ -17,30 +17,29 @@ const MintNFT = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (window.ethereum) {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      provider.send("eth_requestAccounts", []).then(() => {
-        provider.getSigner().then((signer) => {
-          setProvider(provider);
-          setSigner(signer);
-          setContract(new ethers.Contract(contractAddress, ABI, signer));
-        });
-      });
-    } else {
-      setMessage("Please install MetaMask.");
-    }
-
-    // Set the current date
-    const currentDate = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
-    setInterviewDate(currentDate);
-
-    // Load feedback and rating from localStorage
-    const storedFeedback = localStorage.getItem("feedback") || "";
-    const storedRating = localStorage.getItem("score") || "";
-    
-    setFeedback(storedFeedback);
-    setRating(storedRating);
+    const loadBlockchainData = async () => {
+      try {
+        const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
+        const accounts = await provider.listAccounts(); // Get Hardhat accounts
+        if (accounts.length === 0) throw new Error("No accounts found");
+  
+        const signer = await provider.getSigner(); // No need to pass address
+        const contract = new ethers.Contract(contractAddress, ABI, signer);
+  
+        setProvider(provider);
+        setSigner(signer);
+        setContract(contract);
+        setFeedback(localStorage.getItem("feedback"));
+        setRating(localStorage.getItem("score"))
+      } catch (error) {
+        console.error("Error loading blockchain data:", error);
+        setMessage("Failed to connect to Hardhat network.");
+      }
+    };
+  
+    loadBlockchainData();
   }, []);
+   
 
   const mintNFT = async () => {
     if (!contract) {
@@ -55,12 +54,16 @@ const MintNFT = () => {
 
     try {
       setLoading(true);
+      
+      // Convert rating to an integer
+      const parsedRating = parseInt(rating) || 0;
+
       const tx = await contract.mintCredential(
         recipient,
         candidateName,
         interviewDate,
         feedback,
-        parseInt(rating)
+        parsedRating
       );
       await tx.wait();
       setMessage(`NFT successfully minted for ${recipient}!`);

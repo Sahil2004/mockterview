@@ -3,7 +3,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ethers } from "ethers";
 import { ABI } from "../ABIs/interview_tokens";
 
-const CONTRACT_ADDRESS = "0x610178dA211FEF7D417bC0e6FeD39F05609AD788"; // Replace with your contract address
+const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Replace with your contract address
 const CONTRACT_ABI = ABI; // Paste your contract ABI here
 
 const Profile = () => {

@@ -3,7 +3,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ethers } from "ethers";
 import { ABI } from "../ABIs/interview_tokens";
 
-const contractAddress = "0x610178dA211FEF7D417bC0e6FeD39F05609AD788"; // Replace with your contract address
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Replace with your contract address
 const fundingWalletPrivateKey = "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"; // Hardhat Account #1
 
 const RewardUser = () => {
@@ -18,7 +18,7 @@ const RewardUser = () => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-    setAmount(parseInt(localStorage.getItem("score"))/10 ?? 0);
+    setAmount((parseInt(localStorage.getItem("score"))/10 ?? 0).toString());
   }, []);
 
   // Check recipient balance
@@ -86,10 +86,9 @@ const RewardUser = () => {
               Balance: {recipientBalance} IVT
             </p>
             <input
-              type="number"
+              type="text"
               placeholder="Amount (IVT)"
-              readOnly
-              value={amount}
+              value={amount.toString()}
               onChange={(e) => setAmount(e.target.value)}
               className="mt-2 w-full p-2 border rounded"
             />
