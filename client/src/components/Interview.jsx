@@ -10,11 +10,8 @@ const getRandomInt = (max) => Math.floor(Math.random() * max);
 const Interview = () => {
   const [code, setCode] = useState("// Write your code here...");
   const [isSpeechOn, setIsSpeechOn] = useState(false);
-  const [chatInput, setChatInput] = useState("");
   const [initialAnalysis, setInitialAnalysis] = useState("");
-  const [feedback, setFeedback] = useState(null);
   const [data, setData] = useState([]);
-  const [doubt, setDoubt] = useState("hidden");
   const rand = getRandomInt(2);
 
   useEffect(() => {
@@ -31,79 +28,122 @@ const Interview = () => {
   };
 
   const handleSubmit = async () => {
+    console.log('Submit button clicked');
     const question = data[rand]?.statement;
-    const answerType = "code";
+    const answerType = 'code'; // Assuming the answer type is code
 
     const requestBody = {
-      question: { ...data[rand] },
+      question: {
+        title: data[rand]?.title,
+        statement: question,
+        input: data[rand]?.input,
+        output: data[rand]?.output,
+        example_input: data[rand]?.example_input,
+        example_output: data[rand]?.example_output,
+        tags: data[rand]?.tags
+      },
       answer: code,
       answerType,
-      initialAnalysis: chatInput,
+      initialAnalysis
+    };
+
+    console.log('Request Body:', requestBody);
+
+    try {
+      const response = await axios.post('http://localhost:3000/submitAnswer', requestBody);
+      console.log('Feedback Report:', response.data);
+    } catch (error) {
+      console.error('Error submitting answer:', error);
+    }
+  };
+
+  const handleHint = async () => {
+    const question = data[rand]?.statement;
+
+    const requestBody = {
+      question: {
+        title: data[rand]?.title,
+        statement: question,
+        input: data[rand]?.input,
+        output: data[rand]?.output,
+        example_input: data[rand]?.example_input,
+        example_output: data[rand]?.example_output,
+        tags: data[rand]?.tags
+      }
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/submitAnswer",
-        requestBody
-      );
-      setFeedback(response.data);
+      const response = await axios.post('http://localhost:3000/doubt', requestBody);
+      alert(`Hint: ${response.data.ideas}`);
     } catch (error) {
-      console.error("Error submitting answer:", error);
+      console.error('Error fetching hint:', error);
     }
   };
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center p-6 bg-gray-50">
-      <div className="absolute top-4 left-4 text-lg font-medium">Timer</div>
-      <div className="absolute top-4 right-4 flex items-center gap-2">
-        <span className="text-gray-600">Speech Recognition</span>
+    <div className="h-screen bg-gray-100 flex flex-col items-center justify-center">
+      {/* Timer */}
+      <div className="absolute top-4 left-4 bg-red-500 text-white px-4 py-2 rounded-md text-lg">
+        Timer
+      </div>
+
+      {/* Speech Recognition Toggle */}
+      <div className="absolute top-4 right-4 flex items-center space-x-2">
+        <span className="text-gray-600">Speech recognition</span>
         <button
           onClick={toggleSpeechRecognition}
-          className={`w-6 h-6 rounded-full ${
-            isSpeechOn ? "bg-green-500" : "bg-gray-300"
-          }`}
+          className={`w-6 h-6 rounded-full ${isSpeechOn ? "bg-green-500" : "bg-gray-300"}`}
         />
       </div>
 
-      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="flex flex-col space-y-4">
-          <div className="p-6 bg-white shadow rounded-lg">
-            <h1 className="text-xl font-semibold">{data[rand]?.id}</h1>
-            <p className="mt-2 text-gray-700">{data[rand]?.statement}</p>
-          </div>
+      {/* Main Layout */}
+      <div className="w-3/4 grid grid-cols-2 gap-4">
+        {/* Left Side: Question + Coding Window */}
+        <div className="col-span-1 flex flex-col space-y-4">
+          <div className="bg-red-400 p-6 rounded-md text-white text-xl text-center">
+            <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-md">
+              <h1 className="text-2xl font-semibold text-center mb-2">
+                {data[rand]?.id}
+              </h1>
 
-          <div className="p-4 bg-white shadow rounded-lg">
+              <p className="mt-4 text-gray-700 leading-relaxed">
+                {data[rand]?.statement}
+              </p>
+            </div>
+          </div>
+          <div className="bg-red-400 p-4 rounded-md">
             <CodeMirror
               value={code}
               height="200px"
               extensions={[javascript()]}
               onChange={(value) => setCode(value)}
+              className="text-white"
             />
           </div>
         </div>
 
-        <div className="flex flex-col space-y-4">
-          <div className="p-6 bg-white shadow rounded-lg">
-            <h2 className="text-lg font-semibold">Chatbox with AI</h2>
+        {/* Right Side: Chatbox */}
+        <div className="col-span-1 flex flex-col space-y-4">
+          <div className="bg-red-400 p-6 rounded-md text-white text-xl text-center h-[calc(100%-245px)]">
+            Chatbox with AI
           </div>
 
-          <textarea
-            className="w-full p-2 border rounded-md text-gray-700"
-            value={initialAnalysis}
-            onChange={(e) => setInitialAnalysis(e.target.value)}
-            placeholder="Write your initial analysis here"
-          />
+          <div>
+            <h2>Initial Analysis</h2>
+            <textarea
+              value={initialAnalysis}
+              onChange={(e) => setInitialAnalysis(e.target.value)}
+              placeholder="Write your initial analysis here"
+            />
+          </div>
 
           <div className="flex justify-center">
-            <input
-              type="text"
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
-              placeholder="Type your message..."
-              className="w-full p-2 border m-1 rounded-md text-gray-700"
-              class={doubt}
-            />
-            <button onClick={() => doubt == "hidden" ? setDoubt("") : setDoubt("hidden")} className="p-2 bg-blue-500 m-1 text-white rounded-md">Ask doubt</button>
+            <button
+              onClick={handleHint}
+              className="p-2 bg-blue-500 m-1 text-white rounded-md"
+            >
+              Hint
+            </button>
           </div>
 
           <button
@@ -112,26 +152,6 @@ const Interview = () => {
           >
             Submit
           </button>
-
-          {feedback && (
-            <div className="p-4 bg-white shadow rounded-lg">
-              <h2 className="text-lg font-semibold">Feedback</h2>
-              <p>
-                <strong>Initial Analysis Feedback:</strong>{" "}
-                {feedback.initialAnalysisFeedback}
-              </p>
-              <p>
-                <strong>Code Review Feedback:</strong>{" "}
-                {feedback.codeReviewFeedback}
-              </p>
-              <p>
-                <strong>AI Answer:</strong> {feedback.aiAnswer}
-              </p>
-              <p>
-                <strong>Score:</strong> {feedback.score}
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </div>
