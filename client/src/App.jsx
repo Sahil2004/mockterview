@@ -4,6 +4,7 @@ import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
+import Profile from "./components/Profile";
 import Question from "./components/Question";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
@@ -31,6 +32,14 @@ const App = () => {
             element={
               <PrivateRoute>
                 <Interview />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
               </PrivateRoute>
             }
           />
