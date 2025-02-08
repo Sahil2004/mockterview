@@ -8,6 +8,7 @@ import Question from "./components/Question";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 
+
 const Dashboard = () => (
   <div>
     <h1>Dashboard (Protected)</h1>
