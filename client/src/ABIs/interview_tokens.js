@@ -5,6 +5,11 @@ export const ABI = [
         "internalType": "address",
         "name": "initialOwner",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_fundingWallet",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -262,6 +267,19 @@ export const ABI = [
         "internalType": "uint8",
         "name": "",
         "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fundingWallet",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
