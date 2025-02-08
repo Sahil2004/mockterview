@@ -13,6 +13,9 @@ const Home = () => {
       <Link to="/signup">
         <button style={{ margin: "10px", padding: "10px 20px" }}>Signup</button>
       </Link>
+      <Link to="/verify">
+        <button style={{ margin: "10px", padding: "10px 20px" }}>Verify Credentials</button>
+      </Link>
     </div>
   );
 };
