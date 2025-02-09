@@ -47,8 +47,8 @@ const App = () => {
             }
           />
           <Route path="/verify" element={<VerifyCredentials />} />
-          <Route path="/reward" element={<RewardUser />} />
-          <Route path="/rewardCred" element={<RewardCreds />} />
+          <Route path="/rewards" element={<RewardUser />} />
+          <Route path="/rewardCreds" element={<RewardCreds />} />
         </Routes>
       </Router>
     </AuthProvider>
