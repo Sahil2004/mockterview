@@ -82,9 +82,9 @@ const MintNFT = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-md text-center w-96">
-        <h1 className="text-2xl font-semibold text-gray-800">
+    <div className="flex justify-center items-center h-screen  min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex-col ">
+      <div className="p-6 rounded-lg shadow-md text-center w-96  bg-gray-800/50">
+        <h1 className="text-2xl font-semibold text-white">
           Mint Interview Credential NFT
         </h1>
         <input
@@ -92,33 +92,33 @@ const MintNFT = () => {
           placeholder="Recipient Address"
           value={recipient}
           onChange={(e) => setRecipient(e.target.value)}
-          className="mt-4 w-full p-2 border rounded"
+          className="mt-4 w-full p-2 border rounded text-white"
         />
         <input
           type="text"
           placeholder="Candidate Name"
           value={candidateName}
           onChange={(e) => setCandidateName(e.target.value)}
-          className="mt-2 w-full p-2 border rounded"
+          className="mt-2 w-full p-2 border rounded text-white"
         />
         <input
           type="date"
           value={interviewDate}
           readOnly
-          className="mt-2 w-full p-2 border rounded bg-gray-200 cursor-not-allowed"
+          className="mt-2 w-full p-2 border rounded bg-gray-800/5 cursor-not-allowed text-white"
         />
         <textarea
           placeholder="Feedback"
           value={feedback}
           readOnly
-          className="mt-2 w-full p-2 border rounded bg-gray-200 cursor-not-allowed"
+          className="mt-2 w-full p-2 border rounded bg-gray-800/50 cursor-not-allowed text-white"
         />
         <input
           type="number"
           placeholder="Rating (0-10)"
           value={rating}
           readOnly
-          className="mt-2 w-full p-2 border rounded bg-gray-200 cursor-not-allowed"
+          className="mt-2 w-full p-2 border rounded bg-gray-800/50 text-white cursor-not-allowed"
         />
         <button
           onClick={mintNFT}

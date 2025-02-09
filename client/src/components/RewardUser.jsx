@@ -66,12 +66,12 @@ const RewardUser = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-md text-center w-96">
-        <h1 className="text-2xl font-semibold text-gray-800">Reward User</h1>
+    <div className="flex justify-center items-center h-screen  min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex-col ">
+      <div className=" bg-gray-800/50 rounded-xl   p-6  shadow-md text-center w-96">
+        <h1 className="text-2xl font-semibold text-white">Reward User</h1>
         {user ? (
           <>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 text-white">
               Logged in as: <span className="font-medium">{user.email}</span>
             </p>
             <input
@@ -80,9 +80,9 @@ const RewardUser = () => {
               value={userAddress}
               onChange={(e) => setUserAddress(e.target.value)}
               onBlur={checkRecipientBalance} // Check balance on blur
-              className="mt-4 w-full p-2 border rounded"
+              className="mt-4 w-full p-2 border rounded text-white"
             />
-            <p className="text-sm mt-1">
+            <p className="text-sm mt-1 text-white">
               Balance: {recipientBalance} IVT
             </p>
             <input
@@ -90,7 +90,7 @@ const RewardUser = () => {
               placeholder="Amount (IVT)"
               value={amount.toString()}
               onChange={(e) => setAmount(e.target.value)}
-              className="mt-2 w-full p-2 border rounded"
+              className="mt-2 w-full p-2 border rounded text-white"
             />
             <button
               onClick={rewardUser}
