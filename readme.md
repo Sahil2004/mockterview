@@ -2,15 +2,15 @@
 
 Mockterview is an AI-driven mock interview platform that simulates Google-style technical interviews, offering real-time AI feedback, blockchain-backed credential verification, and crypto-based rewards.  
 
-## Table of Contents  
-- Overview  
-- Features  
-- Technical Architecture  
-- Blockchain Integration  
-- Tech Stack  
-- Market Potential  
-- Future Scope  
-- Contributors  
+## **Table of Contents**
+- [Overview](#overview)
+- [Features](#features)
+- [Technical Architecture](#technical-architecture)
+- [Blockchain Integration](#blockchain-integration)
+- [Tech Stack](#tech-stack)
+- [Market Potential](#market-potential)
+- [Future Scope](#future-scope)
+- [Contributors](#contributors)
 
 ## Overview  
 Job seekers struggle with mock interviews due to:  
