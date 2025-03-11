@@ -126,7 +126,7 @@ Phase 3: Secure Web3 Identity System
 ## Getting Started
 ### 1. Clone the Repository
 ```sh
-git clone https://github.com/YOUR_GITHUB/mockterview.git
+git clone https://github.com/Sahil2004/mockterview.git
 cd mockterview
 ```
 ### 2. Install Dependencies
